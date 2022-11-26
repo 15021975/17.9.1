@@ -8,14 +8,11 @@ print(array)
 namber = int(input('Введите число: \n'))
 array.append(namber) #добавление введенного числа в массив
 
-# Сортировка списка по возрастанию элементов
-for i in range(len(array)): # проходим по всему массиву
-     idx_min = i # сохраняем индекс предположительно максимального элемента
-     for j in range(i, len(array)):
-         if array[j] < array[idx_min]: #меняeм знак на меньше
-             idx_min = j
-     if i != idx_min: # если индекс не совпадает с минимальным, меняем
-         array[i], array[idx_min] = array[idx_min], array[i]
+# Сортировка пузырьком списка по возрастанию элементов
+for i in range(len(array)):
+     for j in range(len(array)-i-1):
+        if array[j] > array[j+1]:
+           array[j], array[j+1] = array[j+1], array[j]
 print(array)
 
 # Двоичный поиск
