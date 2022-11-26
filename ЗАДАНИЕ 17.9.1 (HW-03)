@@ -1,0 +1,37 @@
+#Hа вход подается последовательность чисел через пробел - 20 45 4 13 28
+array = list(map(int, input('Введите числа через пробел: \n').split()))
+
+#Преобразование введённой последовательности в список
+print(array)
+
+# а также запрашивается у пользователя любое число - 9
+namber = int(input('Введите число: \n'))
+array.append(namber) #добавление введенного числа в массив
+
+# Сортировка списка по возрастанию элементов
+for i in range(len(array)): # проходим по всему массиву
+     idx_min = i # сохраняем индекс предположительно максимального элемента
+     for j in range(i, len(array)):
+         if array[j] < array[idx_min]: #меняeм знак на меньше
+             idx_min = j
+     if i != idx_min: # если индекс не совпадает с минимальным, меняем
+         array[i], array[idx_min] = array[idx_min], array[i]
+print(array)
+
+# Двоичный поиск
+def binary_search(array, namber, left, right):
+    if left > right: # если левая граница превысила правую,
+        return False # значит элемент отсутствует
+
+    middle = (right+left) // 2 # находимо середину
+    if array[middle] == namber: # если элемент в середине,
+        return middle # возвращаем этот индекс
+    elif namber < array[middle]: # если элемент меньше элемента в середине
+        # рекурсивно ищем в левой половине
+        return binary_search(array, namber, left, middle-1)
+    else: # иначе в правой
+        return binary_search(array, namber, middle+1, right)
+
+a = (binary_search(array, namber, 0, len(array)-1))
+
+print(a)
