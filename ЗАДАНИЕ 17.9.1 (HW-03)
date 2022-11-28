@@ -1,12 +1,21 @@
-#Hа вход подается последовательность чисел через пробел - 20 45 4 13 28
+import math
+#Hа вход подается последовательность чисел через пробел
 array = list(map(int, input('Введите числа через пробел: \n').split()))
 
-#Преобразование введённой последовательности в список
+#Преобразование введённой последовательности в массив
 print(array)
 
-# а также запрашивается у пользователя любое число - 9
+# а также запрашивается у пользователя любое число
 namber = int(input('Введите число: \n'))
-array.append(namber) #добавление введенного числа в массив
+
+# проверяем ,есть ли введенное число в списке,если нет, то добавляем его в спиcок
+while namber:
+    if namber not in array:
+        array.append(namber)
+        break
+    else:
+        print('Совпадение)))такое число уже есть в ряду этого массива!')
+        break
 
 # Сортировка пузырьком списка по возрастанию элементов
 for i in range(len(array)):
@@ -24,11 +33,12 @@ def binary_search(array, namber, left, right):
     if array[middle] == namber: # если элемент в середине,
         return middle # возвращаем этот индекс
     elif namber < array[middle]: # если элемент меньше элемента в середине
-        # рекурсивно ищем в левой половине
-        return binary_search(array, namber, left, middle-1)
-    else: # иначе в правой
-        return binary_search(array, namber, middle+1, right)
+        return binary_search(array, namber, left, middle-1) # рекурсивно ищем в левой половине
+    else: # иначе
+        return binary_search(array, namber, middle + 1, right)# в правой
 
-a = (binary_search(array, namber, 0, len(array)-1))
+a = (binary_search(array,namber, 0, len(array)-1))
 
-print(a)
+print('Index el:', a)# Позиция (индекс) элемента
+print('Index el_left:',a-1)# Позиция (индекс) соседнего слева элемента
+print('Index el_right:',a+1)# Позиция (индекс) соседнего справа элемента
